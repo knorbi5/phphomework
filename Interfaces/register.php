@@ -1,7 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: knorbi
- * Date: 6/27/2016
- * Time: 7:23 PM
- */
+include_once("../Classes/Data.php");
+
+$email = $_POST["email"];
+$password = $_POST["password"];
+
+$data = new Data();
+$register = $data->registerUser($email, $password);
+echo $register;

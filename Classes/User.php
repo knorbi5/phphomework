@@ -1,23 +1,26 @@
 <?php
-include_once("Data.php");
-include_once("View.php");
-/**
- * Created by PhpStorm.
- * User: knorbi
- * Date: 6/27/2016
- * Time: 7:28 PM
- */
-class User{
-    public $view;
-    public $data;
+    include_once("Data.php");
+    include_once("View.php");
 
-    public function __construct(){
-        $this->view = new View();
-        $this->data = new Data();
-    }
+    class User{
+        public $view;
+        public $data;
 
-    public function showUserPage(){
-        // Itt eldöntjük (a data infói alapján), hogy mit jelenítünk meg
-        $this->view->showRegistrationLayout();
+        public function __construct(){
+            $this->view = new View();
+            $this->data = new Data();
+        }
+
+        public function showAvailablePage(){
+            // Itt eldÃ¶ntjÃ¼k (a data infÃ³i alapjÃ¡n), hogy mit jelenÃ­tÃ¼nk meg
+            if($this->data->getCurrentStatus() == "1"){
+                $this->view->showLoggedInLayout();
+            }else{
+                $this->view->showLoginLayout();
+            }
+        }
+
+        public function showRegistrationPage(){
+            $this->view->showRegistrationLayout();
+        }
     }
-}
