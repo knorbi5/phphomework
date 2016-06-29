@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2016. Jún 28. 22:19
+-- Létrehozás ideje: 2016. Jún 29. 20:57
 -- Kiszolgáló verziója: 10.1.13-MariaDB
 -- PHP verzió: 5.6.21
 
@@ -29,7 +29,8 @@ SET time_zone = "+00:00";
 CREATE TABLE `phphomework_users` (
   `ID` int(11) NOT NULL,
   `Email` varchar(120) CHARACTER SET utf8 COLLATE utf8_hungarian_ci NOT NULL,
-  `Password` varchar(150) NOT NULL,
+  `Password` varchar(150) CHARACTER SET utf8 COLLATE utf8_hungarian_ci NOT NULL,
+  `Name` varchar(200) NOT NULL,
   `Status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -37,9 +38,8 @@ CREATE TABLE `phphomework_users` (
 -- A tábla adatainak kiíratása `phphomework_users`
 --
 
-INSERT INTO `phphomework_users` (`ID`, `Email`, `Password`, `Status`) VALUES
-(1, 'knorbi8@gmail.com', 'asdasdasd', 0),
-(2, 'knorbi5@freemail.hu', 'asdasdasdasdb', 0);
+INSERT INTO `phphomework_users` (`ID`, `Email`, `Password`, `Name`, `Status`) VALUES
+(18, 'knorbi8@gmail.com', 'a3dcb4d229de6fde0db5686dee47145d', 'KulcsÃ¡r Norbert', 0);
 
 --
 -- Indexek a kiírt táblákhoz
@@ -60,7 +60,7 @@ ALTER TABLE `phphomework_users`
 -- AUTO_INCREMENT a táblához `phphomework_users`
 --
 ALTER TABLE `phphomework_users`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
