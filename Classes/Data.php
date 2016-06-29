@@ -17,20 +17,28 @@
         }
 
         public function loginUser($email, $password){
-            $loginProcess = $this->dbConnection->prepare("SELECT ID FROM phphomework_users WHERE Email = ? AND Password = ?");
-            $loginProcess->bind_param("ss", $email, $password);
+            $userName = "";
+
+            $loginProcess = $this->dbConnection->prepare("SELECT Name FROM phphomework_users WHERE Email = ? AND Password = ?");
+            $loginProcess->bind_param("ss", $email, $this->hashPassword($password));
             $loginProcess->execute();
             $loginProcess->store_result();
             $userFound = $loginProcess->num_rows;
-            $loginProcess->close();
+            $loginProcess->bind_result($userName);
 
             if($userFound == 1){
-                $_SESSION["homeworkuserloggedinstatus"] = 1;
-                $_SESSION["homeworkuseremail"] = $email;
+                while($loginProcess->fetch()){
+                    $_SESSION["homeworkuserloggedinstatus"] = 1;
+                    $_SESSION["homeworkuseremail"] = $email;
+                    $_SESSION["homeworkusername"] = $userName;
+                }
+
+                $loginProcess->close();
 
                 return 1;
             }
 
+            $loginProcess->close();
             return false;
         }
 
@@ -40,16 +48,22 @@
             return 1;
         }
 
-        public function registerUser($email, $password){
-            $registerProcess = $this->dbConnection->prepare("INSERT INTO phphomework_users (Email, Password) VALUES (?, ?)");
-            $registerProcess->bind_param("ss", $email, $password);
+        public function registerUser($email, $password, $name){
+            $registerProcess = $this->dbConnection->prepare("INSERT INTO phphomework_users (Email, Password, Name) VALUES (?, ?, ?)");
+            $registerProcess->bind_param("sss", $email, $this->hashPassword($password), $name);
             $registerProcess->execute();
+            $registerProcess->store_result();
+            $registerSuccessful = $registerProcess->affected_rows;
             $registerProcess->close();
 
-            // Email a regisztrációról
-            //$this->sendMail("Köszönjük a regisztrációt!", "Regisztráció", $email);
+            if($registerSuccessful == 1){
+                // Email a regisztrációról
+                //$this->sendMail("Köszönjük a regisztrációt!", "Regisztráció", $email);
 
-            return 1;
+                return 1;
+            }
+
+            return false;
         }
 
         private function sendMail($message, $subject, $email){
@@ -59,5 +73,9 @@
 
             $msg = wordwrap($message, 70);
             mail($email, $subject, $msg);
+        }
+
+        private function hashPassword($password){
+            return md5($password);
         }
     }

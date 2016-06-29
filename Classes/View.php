@@ -11,9 +11,11 @@ class View{
                 <form id="registerUser" class="form-signin">
                     <h2 class="form-signin-heading">Regisztráció</h2>
                     <label for="inputEmail" class="sr-only">Email cím</label>
-                    <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email cím" required="" autofocus="">
+                    <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email cím" autofocus="">
                     <label for="inputPassword" class="sr-only">Jelszó</label>
-                    <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Jelszó" required="" min="5" max="40">
+                    <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Jelszó">
+                    <label for="inputName" class="sr-only">Név</label>
+                    <input type="text" name="name" id="inputName" class="form-control" placeholder="Név">
                     <button class="btn btn-lg btn-primary btn-block" type="submit">Regisztrálok</button>
                 </form>
             </div>
@@ -55,7 +57,7 @@ class View{
                   </div>
 
                   <div class="inner cover">
-                    <h1 class="cover-heading">Üdvözlöm</h1>
+                    <h1 class="cover-heading">Üdvözlöm, <?php echo $_SESSION["homeworkusername"]; ?>!</h1>
                     <p class="lead">Ön sikeresen bejelentkezett, és a nyitóoldalon van. Itt már csak kilépési lehetősége van.</p>
                   </div>
 
