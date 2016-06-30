@@ -6,7 +6,8 @@
     $password = $_POST["password"];
     $captcha = empty($_POST["g-recaptcha-response"]) ? "" : $_POST["g-recaptcha-response"];
 
-    if($data->getCurrentFailedLogins(1) >= 3){
+    // Captcha ellen?rzése, ha szükséges
+    if($data->checkIfCaptchaIsNeccessary() == true){
         if(empty($captcha) || strlen($captcha) == 0){
             echo "captcha_error";
             exit();

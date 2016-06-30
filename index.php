@@ -1,5 +1,5 @@
 <?php
-include_once("Templates/header.php");
+include_once("Parts/header.php");
 ?>
     <body>
         <?php
@@ -8,5 +8,5 @@ include_once("Templates/header.php");
         ?>
     </body>
 <?php
-include_once("Templates/footer.php");
+include_once("Parts/footer.php");
 ?>

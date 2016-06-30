@@ -1,4 +1,4 @@
-    <!-- jQuery és Bootstrap betöltése -->
+    <!-- jQuery, Bootstrap és saját scriptek betöltése -->
     <link rel="stylesheet" type="text/css" href="Extensions/bootstrap-3.3.6-dist/css/bootstrap-theme.min.css"/>
     <link rel="stylesheet" type="text/css" href="Extensions/bootstrap-3.3.6-dist/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="Extensions/bootstrap-3.3.6-dist/css/signin.css"/>

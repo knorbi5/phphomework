@@ -5,6 +5,7 @@ class View{
         
     }
 
+    // Regisztrációs felület megjelenítése
     public function showRegistrationLayout(){
         ?>
             <div class="container">
@@ -22,6 +23,7 @@ class View{
         <?php
     }
 
+    // Belépési felület megjelenítése
     public function showLoginLayout($showLoginCaptcha){
         ?>
             <div class="container">
@@ -41,6 +43,7 @@ class View{
         <?php
     }
 
+    // Belépett felhasználói felület megjelenítése
     public function showLoggedInLayout(){
         ?>
             <div class="site-wrapper">

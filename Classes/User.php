@@ -11,14 +11,15 @@
             $this->data = new Data();
         }
 
+        // Felhasználó státusza alapján elérhető felület megjelenítése
         public function showAvailablePage(){
-            // Itt eldöntjük (a data infói alapján), hogy mit jelenítünk meg
+            // Belépett felhasználó
             if($this->data->getCurrentStatus() == "1"){
                 $this->view->showLoggedInLayout();
             }else{
                 $showLoginCaptcha = false;
 
-                if($this->data->getCurrentFailedLogins(1) >= 3){
+                if($this->data->checkIfCaptchaIsNeccessary() == true){
                     $showLoginCaptcha = true;
                 }
 
@@ -26,6 +27,7 @@
             }
         }
 
+        // Regisztrációs felület megjelenítése
         public function showRegistrationPage(){
             $this->view->showRegistrationLayout();
         }

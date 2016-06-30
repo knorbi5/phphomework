@@ -7,15 +7,18 @@
         private $dbConnection;
 
         public function __construct(){
+            // Adatbázis kapcsolat felépítése
             $this->dbConnection = new mysqli("localhost", "root", "", "phphomework");
         }
 
+        // Felhasználó státuszának lekérése
         public function getCurrentStatus(){
             $current_status = isset($_SESSION["homeworkuserloggedinstatus"]) ? $_SESSION["homeworkuserloggedinstatus"] : 0;
 
             return $current_status;
         }
 
+        // Felhasználó beléptetése
         public function loginUser($email, $password){
             $userName = "";
 
@@ -45,12 +48,14 @@
             return false;
         }
 
+        // Felhasználó kiléptetése
         public function logoutUser(){
             session_unset();
 
             return 1;
         }
 
+        // Felhasználó regisztrációja
         public function registerUser($email, $password, $name){
             $registerProcess = $this->dbConnection->prepare("INSERT INTO phphomework_users (Email, Password, Name) VALUES (?, ?, ?)");
             $registerProcess->bind_param("sss", $email, $this->hashPassword($password), $name);
@@ -61,7 +66,7 @@
 
             if($registerSuccessful == 1){
                 // Email a regisztrációról
-                //$this->sendMail("Köszönjük a regisztrációt!", "Regisztráció", $email);
+                $this->sendMail("Köszönjük a regisztrációt!", "Regisztráció", $email);
 
                 return 1;
             }
@@ -69,6 +74,7 @@
             return false;
         }
 
+        //Sikertelen belépés logolása
         public function logFailedLogin($type){
             $current_ip = $this->getCurrentIP();
 
@@ -81,8 +87,10 @@
             return 1;
         }
 
-        public function getCurrentFailedLogins($type){
+        // Captcha kitöltés szükséges-e
+        public function checkIfCaptchaIsNeccessary(){
             $current_ip = $this->getCurrentIP();
+            $type = 1;
 
             $lastHourFailures = date('Y-m-d H:i:s', time() - 3600);
             $failCounterProcess = $this->dbConnection->prepare("SELECT ID FROM phphomework_login_fails WHERE Type = ? AND Value = ? AND Time > ?");
@@ -92,22 +100,35 @@
             $fails = $failCounterProcess->num_rows;
             $failCounterProcess->close();
 
-            return $fails;
+            if($fails >= 3){
+                return true;
+            }
+
+            return false;
         }
 
+        // Email küldése
         private function sendMail($message, $subject, $email){
             if(empty($message) || empty($subject) || empty($email)){
                 return false;
             }
 
-            $msg = wordwrap($message, 70);
-            mail($email, $subject, $msg);
+            if(function_exists('mail')){
+                $msg = wordwrap($message, 70);
+                $headers = 'From: info@phphomework.com' . "\r\n" .
+                    'Reply-To: info@phphomework.com' . "\r\n" .
+                    'X-Mailer: PHP/' . phpversion();
+
+                mail($email, $subject, $msg, $headers);
+            }
         }
 
+        // Jelszó kódolása
         private function hashPassword($password){
             return md5($password);
         }
 
+        // Felhasználó IP címének lekérése
         private function getCurrentIP(){
             return $_SERVER['REMOTE_ADDR'];
         }
