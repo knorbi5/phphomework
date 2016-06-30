@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2016. Jún 29. 20:57
+-- Létrehozás ideje: 2016. Jún 30. 21:05
 -- Kiszolgáló verziója: 10.1.13-MariaDB
 -- PHP verzió: 5.6.21
 
@@ -23,6 +23,19 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Tábla szerkezet ehhez a táblához `phphomework_login_fails`
+--
+
+CREATE TABLE `phphomework_login_fails` (
+  `ID` int(11) NOT NULL,
+  `Type` int(11) NOT NULL,
+  `Value` varchar(500) CHARACTER SET utf8 COLLATE utf8_hungarian_ci NOT NULL,
+  `Time` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Tábla szerkezet ehhez a táblához `phphomework_users`
 --
 
@@ -35,15 +48,14 @@ CREATE TABLE `phphomework_users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- A tábla adatainak kiíratása `phphomework_users`
---
-
-INSERT INTO `phphomework_users` (`ID`, `Email`, `Password`, `Name`, `Status`) VALUES
-(18, 'knorbi8@gmail.com', 'a3dcb4d229de6fde0db5686dee47145d', 'KulcsÃ¡r Norbert', 0);
-
---
 -- Indexek a kiírt táblákhoz
 --
+
+--
+-- A tábla indexei `phphomework_login_fails`
+--
+ALTER TABLE `phphomework_login_fails`
+  ADD PRIMARY KEY (`ID`);
 
 --
 -- A tábla indexei `phphomework_users`
@@ -57,10 +69,15 @@ ALTER TABLE `phphomework_users`
 --
 
 --
+-- AUTO_INCREMENT a táblához `phphomework_login_fails`
+--
+ALTER TABLE `phphomework_login_fails`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT a táblához `phphomework_users`
 --
 ALTER TABLE `phphomework_users`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
