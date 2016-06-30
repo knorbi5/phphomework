@@ -18,7 +18,7 @@
             }else{
                 $showLoginCaptcha = false;
 
-                if($this->data->getCurrentFailedLogins(1) > 3){
+                if($this->data->getCurrentFailedLogins(1) >= 3){
                     $showLoginCaptcha = true;
                 }
 

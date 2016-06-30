@@ -61,7 +61,7 @@ class View{
 
                   <div class="inner cover">
                     <h1 class="cover-heading">Üdvözlöm, <?php echo $_SESSION["homeworkusername"]; ?>!</h1>
-                    <p class="lead">Ön sikeresen bejelentkezett, és a nyitóoldalon van. Itt már csak kilépési lehetősége van.</p>
+                    <p class="lead">Ön sikeresen bejelentkezett, és a címlapon van. Itt már csak kilépési lehetősége van.</p>
                   </div>
 
                   <div class="mastfoot">
