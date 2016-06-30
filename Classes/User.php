@@ -16,7 +16,13 @@
             if($this->data->getCurrentStatus() == "1"){
                 $this->view->showLoggedInLayout();
             }else{
-                $this->view->showLoginLayout();
+                $showLoginCaptcha = false;
+
+                if($this->data->getCurrentFailedLogins(1) > 3){
+                    $showLoginCaptcha = true;
+                }
+
+                $this->view->showLoginLayout($showLoginCaptcha);
             }
         }
 

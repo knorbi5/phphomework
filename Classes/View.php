@@ -22,7 +22,7 @@ class View{
         <?php
     }
 
-    public function showLoginLayout(){
+    public function showLoginLayout($showLoginCaptcha){
         ?>
             <div class="container">
                 <form id="loginUser" class="form-signin">
@@ -31,6 +31,9 @@ class View{
                     <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email cím" required="" autofocus="">
                     <label for="inputPassword" class="sr-only">Jelszó</label>
                     <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Jelszó" required="">
+                    <?php if($showLoginCaptcha){ ?>
+                        <div class="g-recaptcha" data-sitekey="6Lfs6iMTAAAAAGFIBhtZm-d5HwQr3DVzlf-JLfv1"></div>
+                    <?php } ?>
                     <button class="btn btn-lg btn-success btn-block" type="submit">Belépés</button>
                     <button class="btn btn-lg btn-primary btn-block" type="button" onClick="location.href='<?php echo "registration.php"; ?>'">Regisztráció</button>
                 </form>

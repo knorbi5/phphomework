@@ -8,12 +8,17 @@
 
     <script type="text/javascript">
         jQuery(document).ready(function(){
+            jQuery.validator.addMethod("checkpassword", function(value) {
+                return /\d/.test(value);
+            });
+
             jQuery("#registerUser").validate({
                 rules: {
                     password: {
                         minlength: 5,
                         maxlength: 40,
-                        required: true
+                        required: true,
+                        checkpassword: true
                     },
                     name: {
                         maxlength: 200,
@@ -25,16 +30,17 @@
                 },
                 messages: {
                     password: {
-                        required: "A jelszó megadása kötelező",
+                        required: "A jelszó megadása kötelező!",
                         minlength: "Minimum 5 karakter megadása szükséges",
-                        maxlength: "Maximum 40 karakter adható meg"
+                        maxlength: "Maximum 40 karakter adható meg",
+                        checkpassword: "A jelszónak tartalmaznia kell legalább 1 számot!"
                     },
                     name: {
-                        required: "A név megadása kötelező",
+                        required: "A név megadása kötelező!",
                         maxlength: "Maximum 200 karakter adható meg"
                     },
                     email: {
-                        required: "Az email cím megadása kötelező"
+                        required: "Az email cím megadása kötelező!"
                     }
                 },
                 submitHandler: function(form){
@@ -58,6 +64,11 @@
             jQuery("#loginUser").submit(function (event) {
                 var dataToLogin = jQuery(this).serialize();
 
+                /*var checkCaptcha = grecaptcha.getResponse();
+                if(checkCaptcha.length == 0){
+                    return false;
+                }*/
+
                 jQuery.ajax({
                     method: "POST",
                     url: "interfaces/login.php",
@@ -67,6 +78,7 @@
                         location.reload();
                     }else{
                         alert("Sikertelen belépés");
+                        location.reload();
                     }
                 });
 
