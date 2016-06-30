@@ -40,8 +40,10 @@
 
                 return 1;
             }else{
-                // Sikertelen belépés logolása
-                $this->logFailedLogin(1);
+                // Sikertelen belépés logolása, ha a captcha nem aktív
+                if(!$this->checkIfCaptchaIsNeccessary()){
+                    $this->logFailedLogin(1);
+                }
             }
 
             $loginProcess->close();
