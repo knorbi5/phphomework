@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2016. Jún 30. 21:05
+-- Létrehozás ideje: 2016. Jún 30. 21:11
 -- Kiszolgáló verziója: 10.1.13-MariaDB
 -- PHP verzió: 5.6.21
 
@@ -29,9 +29,9 @@ SET time_zone = "+00:00";
 CREATE TABLE `phphomework_login_fails` (
   `ID` int(11) NOT NULL,
   `Type` int(11) NOT NULL,
-  `Value` varchar(500) CHARACTER SET utf8 COLLATE utf8_hungarian_ci NOT NULL,
+  `Value` varchar(500) COLLATE utf8_hungarian_ci NOT NULL,
   `Time` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
 
 -- --------------------------------------------------------
 
@@ -41,11 +41,11 @@ CREATE TABLE `phphomework_login_fails` (
 
 CREATE TABLE `phphomework_users` (
   `ID` int(11) NOT NULL,
-  `Email` varchar(120) CHARACTER SET utf8 COLLATE utf8_hungarian_ci NOT NULL,
-  `Password` varchar(150) CHARACTER SET utf8 COLLATE utf8_hungarian_ci NOT NULL,
-  `Name` varchar(200) NOT NULL,
+  `Email` varchar(120) COLLATE utf8_hungarian_ci NOT NULL,
+  `Password` varchar(150) COLLATE utf8_hungarian_ci NOT NULL,
+  `Name` varchar(200) COLLATE utf8_hungarian_ci NOT NULL,
   `Status` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
 
 --
 -- Indexek a kiírt táblákhoz
